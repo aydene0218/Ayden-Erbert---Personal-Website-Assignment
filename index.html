@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Home Page</title>
+    <link rel="stylesheet" type="text/css" href="fancy.css">
+    <style>
+      #board td {
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 40px;
+        cursor: pointer;
+      }
+      #board {
+      border-collapse: collapse;
+      margin-top: 10px;
+      }
+      #board td {
+      border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to My Website</h1>
+
+    <p>
+      This is my <strong>first</strong> paragraph. It shows that I can write some <em>HTML</em> myself. 
+      I wanted to make it a little longer so that it will wrap across multiple lines in the browser window. 
+      Creating a website from scratch is fun, and I'm learning how different tags work together to make 
+      a simple web page look nice. I can always edit it later to make it even better.
+    </p>
+
+    <p>
+      This is the <strong>second</strong> paragraph. I like simple pages because they are <em>easy</em> to read.
+      Adding some extra sentences makes the text wrap naturally. The more I type, the easier it is to see
+      how text fits within the browser window. It's also a great way to practice paragraph structure and 
+      improve typing speed while coding.
+    </p>
+
+    <p>
+      This is the <strong>third</strong> paragraph. I will add more <em>information</em> later about myself,
+      my hobbies, and what I've learned in this class so far. Using HTML lets me control how the page
+      looks and how links work together. Each tag has its own purpose, and experimenting with them
+      helps me understand web design step by step.
+    </p>
+
+    <p>
+      This is the <strong>fourth</strong> paragraph. I used some <em>tags</em> that wrap across lines so 
+      the text looks more balanced. I could also include more sections in the future, like a photo gallery 
+      or links to my projects. For now, this page shows the basics of HTML structure and linking pages together.
+    </p>
+
+    <a href="about.html">Go to About Page</a><br>
+    <a href="resume.html">Go to Resume Page</a>
+
+    <h2>Tic-Tac-Toe Game</h2>
+    <p>Click the boxes to play!</p>
+
+    <table border="1" id="board">
+      <tr>
+        <td onclick="makeMove(this)"></td>
+        <td onclick="makeMove(this)"></td>
+        <td onclick="makeMove(this)"></td>
+      </tr>
+      <tr>
+        <td onclick="makeMove(this)"></td>
+        <td onclick="makeMove(this)"></td>
+        <td onclick="makeMove(this)"></td>
+      </tr>
+      <tr>
+        <td onclick="makeMove(this)"></td>
+        <td onclick="makeMove(this)"></td>
+        <td onclick="makeMove(this)"></td>
+      </tr>
+    </table>
+
+    <p id="message"></p>
+
+    <script>
+      let turn = "X";
+      function makeMove(cell) {
+        if (cell.textContent === "") {
+          cell.textContent = turn;
+          if (checkWin()) {
+            document.getElementById("message").textContent = turn + " wins!";
+            disableBoard();
+          } else if (isBoardFull()) {
+            document.getElementById("message").textContent = "It's a tie!";
+          } else {
+            turn = (turn === "X") ? "O" : "X";
+            document.getElementById("message").textContent = "Turn: " + turn;
+          }
+        }
+      }
+
+      function checkWin() {
+        const cells = document.querySelectorAll("#board td");
+        const combos = [
+          [0,1,2],[3,4,5],[6,7,8],
+          [0,3,6],[1,4,7],[2,5,8],
+          [0,4,8],[2,4,6]
+        ];
+        return combos.some(combo =>
+          cells[combo[0]].textContent &&
+          cells[combo[0]].textContent === cells[combo[1]].textContent &&
+          cells[combo[1]].textContent === cells[combo[2]].textContent
+        );
+      }
+
+      function isBoardFull() {
+        const cells = document.querySelectorAll("#board td");
+        return Array.from(cells).every(cell => cell.textContent !== "");
+      }
+
+      function disableBoard() {
+        const cells = document.querySelectorAll("#board td");
+        cells.forEach(cell => cell.onclick = null);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+body {
+  background-color: #e6e6fa;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: darkblue;
+  font-size: 36px;
+}
+
+h2 {
+  color: darkblue;
+  font-size: 28px;
+}
+
+a {
+  color: darkred;
+}
+
+p {
+  font-family: Georgia, serif;
+}
